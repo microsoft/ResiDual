@@ -1,8 +1,11 @@
-# Enviroment setup
+# ResiDual Transformer
+**The code implementation of [ResiDual: Transformer with Dual Residual Connections](https://arxiv.org/abs/2304.14802).**
+
+## Enviroment setup
 Please use the anaconda to setup the environment by `conda env create -f environment.yaml`.
 Then you can activate the environment by `conda activate resi_dual`.
 
-# Model training
+## Model training
 
 For model training, please follow the [guide](https://github.com/facebookresearch/fairseq/tree/main/examples/translation) to process data, and use the command below
 ```bash
@@ -45,12 +48,10 @@ Any use of third-party trademarks or logos are subject to those third-party's po
 
 ## Cite
 ```
-@misc{xie2023residual,
-    title={ResiDual: Transformer with Dual Residual Connections},
-    author={Shufang Xie and Huishuai Zhang and Junliang Guo and Xu Tan and Jiang Bian and Hany Hassan Awadalla and Arul Menezes and Tao Qin and Rui Yan},
-    year={2023},
-    eprint={2304.14802},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
+@article{xie2023residual,
+  title={ResiDual: Transformer with Dual Residual Connections},
+  author={Xie, Shufang and Zhang, Huishuai and Guo, Junliang and Tan, Xu and Bian, Jiang and Awadalla, Hany Hassan and Menezes, Arul and Qin, Tao and Yan, Rui},
+  journal={arXiv preprint arXiv:2304.14802},
+  year={2023}
 }
 ```
