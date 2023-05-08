@@ -1,0 +1,75 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
+model:
+  _name: resi_dual
+  dropout: 0.3
+  activation_dropout: 0.1
+  attention_dropout: 0.1
+  encoder:
+    embed_dim: 256
+    ffn_embed_dim: 1024
+    layers: 6
+    attention_heads: 4
+    normalize_before: true
+  decoder:
+    embed_dim: 256
+    output_dim: 256
+    ffn_embed_dim: 1024
+    layers: 6
+    attention_heads: 4
+    normalize_before: true
+  share_all_embeddings: true
+  enc_res_input_norm_scale: 1.0
+  dec_res_input_norm_scale: 1.0
+  base_layers: 0
+
+dataset:
+  max_tokens: 4096
+  num_workers: 16
+  valid_subset: 'valid'
+
+optimizer:
+  _name: adam
+  adam_betas: (0.9,0.98)
+  weight_decay: 0.0001
+
+optimization:
+  max_update: 500000
+  lr: [0.0005]
+  clip_norm: 0
+
+lr_scheduler:
+  _name: inverse_sqrt
+  warmup_updates: 4000
+  warmup_init_lr: 1e-7
+
+criterion:
+  _name: label_smoothed_cross_entropy
+  label_smoothing: 0.1
+
+task:
+  _name: translation
+  data: ???
+  source_lang: de
+  target_lang: en
+  eval_bleu: true
+  eval_bleu_args: '{"beam": 5, "max_len_a": 1.2, "max_len_b": 10}'
+  # eval_tokenized_bleu: true
+  eval_bleu_detok: 'moses'
+  eval_bleu_remove_bpe: '@@ '
+  # eval_bleu_print_samples: true
+
+checkpoint:
+  best_checkpoint_metric: bleu
+  maximize_best_checkpoint_metric: true
+  patience: 20
+  no_epoch_checkpoints: true
+
+common:
+  azureml_logging: true
+  log_format: simple
+
+hydra:
+  run:
+    dir: ???

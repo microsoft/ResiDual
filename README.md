@@ -1,14 +1,25 @@
-# Project
+# Enviroment setup
+Please use the anaconda to setup the environment by `conda env create -f environment.yaml`.
+Then you can activate the environment by `conda activate resi_dual`.
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+# Model training
 
-As the maintainer of this project, please make a few updates:
+For model training, please follow the [guide](https://github.com/facebookresearch/fairseq/tree/main/examples/translation) to process data, and use the command below
+```bash
+LAYER=6 # or 12
+DATA_PATH=THE_PATH_TO_YOUR_DATA_BIN # the data should be fairseq data-bin format
+CONFIG=iwslt.yaml # or other config under hydra_config folder
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+fairseq-hydra-train \
+common.user_dir=$(pwd)/resi_dual \
+task.data=${DATA_PATH} \
+model.encoder.layers=${LAYER} \
+model.decoder.layers=${LAYER} \
+--config-dir hydra_config \
+--config-name ${CONFIG}
+```
+
+
 
 ## Contributing
 
@@ -31,3 +42,15 @@ trademarks or logos is subject to and must follow
 [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
 Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
 Any use of third-party trademarks or logos are subject to those third-party's policies.
+
+## Cite
+```
+@misc{xie2023residual,
+    title={ResiDual: Transformer with Dual Residual Connections},
+    author={Shufang Xie and Huishuai Zhang and Junliang Guo and Xu Tan and Jiang Bian and Hany Hassan Awadalla and Arul Menezes and Tao Qin and Rui Yan},
+    year={2023},
+    eprint={2304.14802},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+```

@@ -1,0 +1,18 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
+name: resi_dual
+dependencies:
+  - pytorch==1.11.0
+  - pip
+  - pip:
+    - fairseq==0.12.2
+    - sacremoses
+    - pyarrow
+    - hydra-core==1.0.7
+    - omegaconf==2.0.6
+    - bitarray
+    - sacrebleu
+    - antlr4-python3-runtime
+    - portalocker
+    - lxml

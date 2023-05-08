@@ -1,0 +1,73 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
+model:
+  _name: resi_dual
+  dropout: 0.3
+  activation_dropout: 0.1
+  attention_dropout: 0.1
+  encoder:
+    embed_dim: 512
+    ffn_embed_dim: 2048
+    layers: 6
+    attention_heads: 8
+    normalize_before: true
+  decoder:
+    embed_dim: 512
+    output_dim: 512
+    ffn_embed_dim: 2048
+    layers: 6
+    attention_heads: 8
+    normalize_before: true
+  share_all_embeddings: true
+  base_layers: 0
+
+dataset:
+  max_tokens: 4096
+  num_workers: 16
+  valid_subset: 'valid'
+
+optimizer:
+  _name: adam
+  adam_betas: (0.9,0.98)
+  weight_decay: 0.0001
+
+optimization:
+  max_update: 50000
+  lr: [0.001]
+  clip_norm: 0
+  update_freq: [16]
+
+lr_scheduler:
+  _name: inverse_sqrt
+  warmup_updates: 4000
+  warmup_init_lr: 1e-7
+
+criterion:
+  _name: label_smoothed_cross_entropy
+  label_smoothing: 0.1
+
+task:
+  _name: translation
+  data: ???
+  source_lang: en
+  target_lang: de
+  eval_bleu: true
+  eval_bleu_args: '{"beam": 5, "max_len_a": 1.2, "max_len_b": 10}'
+  eval_bleu_detok: 'moses'
+  eval_bleu_remove_bpe: '@@ '
+
+checkpoint:
+  keep_last_epochs: 10
+
+common:
+  azureml_logging: true
+  log_format: simple
+  amp: true
+
+distributed_training:
+  find_unused_parameters: true
+
+hydra:
+  run:
+    dir: ???

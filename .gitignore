@@ -1,0 +1,5 @@
+.hydra/
+
+*.pyc
+*.log
+None/
