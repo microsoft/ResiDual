@@ -11,13 +11,11 @@ model:
     ffn_embed_dim: 2048
     layers: 18
     attention_heads: 8
-    normalize_before: true
   decoder:
     embed_dim: 512
     ffn_embed_dim: 2048
     layers: 18
     attention_heads: 8
-    normalize_before: true
   enc_alpha: 1.0
   dec_alpha: 1.0
   share_decoder_input_output_embed: true
