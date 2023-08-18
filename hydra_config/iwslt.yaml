@@ -11,14 +11,12 @@ model:
     ffn_embed_dim: 1024
     layers: 6
     attention_heads: 4
-    normalize_before: true
   decoder:
     embed_dim: 256
     output_dim: 256
     ffn_embed_dim: 1024
     layers: 6
     attention_heads: 4
-    normalize_before: true
   share_all_embeddings: true
   enc_res_input_norm_scale: 1.0
   dec_res_input_norm_scale: 1.0
